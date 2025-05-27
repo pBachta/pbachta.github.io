@@ -17,13 +17,18 @@ const itExperience: Experience[] = [
     role: 'Senior Java Developer',
     company: 'Intive GmbH',
     period: '2022 - Present',
-    description: 'Leading the development of cloud-native applications and microservices architecture.',
+    description: 'Technical leader and backend architect driving the design of scalable Java microservices,' + 
+                  ' mentoring developers, and ensuring code quality and alignment with business goals.',
     achievements: [
-      `SPRAWDZIĆ SKILL MATRIX`,
-      // 'Architected and implemented a scalable microservices platform that improved system reliability by 40%',
-      // 'Led a team of 6 developers in migrating legacy systems to modern cloud infrastructure',
-      // 'Implemented CI/CD pipelines that reduced deployment time from days to minutes',
-      // 'Mentored junior developers and conducted technical interviews for new hires'
+      'Designed and led implementation of scalable microservice-based architecture', 
+      'Responsible for critical modules and system-wide technical decisions',
+      'Conducted thorough code reviews and mentored multiple junior and mid-level developers',
+      'Collaborated directly with Product Owners, DevOps, and QA to align tech with business goals',
+      'Resolved high-priority production issues, conducted root cause analysis and implemented long-term fixes',
+      'Advocated for engineering best practices, clean code and knowledge sharing in the team',
+      'Participated in architecture discussions and contributed to technical roadmaps',
+      'Engaged in continuous learning and applied new technologies to improve development processes',
+      'Worked closely with cross-functional teams to deliver high-quality software solutions',
     ],
   },
   {
@@ -31,27 +36,36 @@ const itExperience: Experience[] = [
     role: 'Java Developer',
     company: 'Intive GmbH',
     period: '2019 - 2022',
-    description: 'Developed and maintained web applications for enterprise clients across various industries.',
+    description: 'Independent backend developer responsible for implementing and maintaining core business' + 
+                  ' features in Java and Spring-based applications, collaborating closely with cross-functional teams.',
     achievements: [
-      `SPRAWDZIĆ SKILL MATRIX`,
-      // 'Built responsive web applications using React, Node.js, and MongoDB',
-      // 'Collaborated with UX designers to implement intuitive user interfaces',
-      // 'Optimized database queries resulting in 60% performance improvement',
-      // 'Integrated third-party APIs and payment gateways into e-commerce platforms'
+      'Responsible for end-to-end feature implementation',
+      'Regular contributor to code reviews and team discussions',
+      'Works independently on modules while coordinating with other teams',
+      'Involved in troubleshooting production issues and debugging complex problems',
+      'Mentored junior developers in day-to-day tasks and best practices',
+      'Participated in Agile ceremonies and contributed to sprint planning',
+      'Collaborated with cross-functional teams to deliver high-quality software',
     ],
-  },  
+  },
   {
     id: 3,
     role: 'Junior Java Developer',
     company: 'Intive GmbH',
     period: '2018 - 2019',
-    description: 'Developed and maintained web applications for enterprise clients across various industries.',
+    description: 'Entry-level backend developer focused on learning core Java and Spring concepts' + 
+                  ' while contributing to small features and bug fixes under close mentorship.',
     achievements: [
-      `SPRAWDZIĆ SKILL MATRIX`,
-      // 'Built responsive web applications using React, Node.js, and MongoDB',
-      // 'Collaborated with UX designers to implement intuitive user interfaces',
-      // 'Optimized database queries resulting in 60% performance improvement',
-      // 'Integrated third-party APIs and payment gateways into e-commerce platforms'
+      'Delivered small features and bugfixes under supervision in an Agile team',
+      'Participated in daily stand-ups, sprint planning, and retrospectives',
+      'Collaborated with senior developers to learn best practices in software development',
+      'Gained experience in RESTful API development and integration',
+      'Familiar with Agile methodologies and version control systems',
+      'Worked with Spring Boot and Hibernate for backend development',
+      'Familiar with reading and understanding business requirements',
+      'Participated in code reviews and pair programming sessions',
+      'Open to feedback and continuously improving based on mentorship',
+      'Used Jira and Git for daily workflow and communication'
     ],
   },
 ];
@@ -109,7 +123,7 @@ const ExperienceCard: React.FC<{ experience: Experience; index: number; isLast: 
           
           <p className="text-gray-600 dark:text-gray-400 mb-4">{experience.description}</p>
           
-          <h5 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Key Achievements:</h5>
+          <h5 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Practical Experience & Collaboration:</h5>
           <ul className="space-y-2">
             {experience.achievements.map((achievement, i) => (
               <li key={i} className="flex items-start">

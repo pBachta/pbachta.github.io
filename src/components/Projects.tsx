@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useInView } from '../hooks/useInView';
 import { ExternalLink, Github as GitHub, BookOpen } from 'lucide-react';
 
@@ -14,16 +14,16 @@ type Project = {
 };
 
 const projectsData: Project[] = [
-  // {
-  //   id: 1,
-  //   title: 'Cloud-Based CRM System',
-  //   description: 'A comprehensive customer relationship management system built with React, Node.js, and AWS. Features include contact management, sales pipeline tracking, and analytics dashboards.',
-  //   image: 'https://images.pexels.com/photos/1181271/pexels-photo-1181271.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-  //   tags: ['React', 'Node.js', 'AWS', 'MongoDB'],
-  //   githubUrl: 'https://github.com/pBachta',
-  //   liveUrl: 'https://example.com',
-  //   blogUrl: 'https://blog.pbachta.dev/projects/crm-system',
-  // },
+  {
+    id: 1,
+    title: '10xCards',
+    description: 'A tool that leverages AI to generate flashcards from text, making studying more efficient and effective.',
+    image: '/projects/10xCards.gif',
+    tags: ['React', 'Node.js', 'AWS', 'MongoDB'],
+    githubUrl: 'https://github.com/pBachta/10x-cards-astro',
+    liveUrl: 'https://10x-cards-ab6.pages.dev',
+    blogUrl: 'https://blog.pbachta.dev/projects/10xCards',
+  },
   // {
   //   id: 2,
   //   title: 'E-commerce Platform',
@@ -54,10 +54,17 @@ const projectsData: Project[] = [
   // },
 ];
 
+const projectsDataSorted = [...projectsData].sort((a, b) => b.id - a.id);
+
 const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(cardRef, { threshold: 0.1 });
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  // Helper: if image is a gif, try to use a static preview (same name, .png)
+  const isGif = project.image.endsWith('.gif');
+  const staticImage = isGif ? project.image.replace(/\.gif$/, '.png') : project.image;
+  const displayImage = isGif && !isHovered ? staticImage : project.image;
 
   return (
     <div 
@@ -71,7 +78,7 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
     >
       <div className="relative overflow-hidden group">
         <img 
-          src={project.image} 
+          src={displayImage} 
           alt={project.title} 
           className="w-full h-48 object-cover transition-transform duration-500 transform group-hover:scale-110"
         />
@@ -119,13 +126,14 @@ const ProjectCard: React.FC<{ project: Project; index: number }> = ({ project, i
           ))}
         </div>
         <a
-          href={project.blogUrl}
-          target="_blank"
-          rel="noreferrer"
+          // href={project.blogUrl}
+          // target="_blank"
+          // rel="noreferrer"
           className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
         >
           <BookOpen size={18} className="mr-2" />
           Read More
+          <p className="ml-2 text-gray-400">coming soon</p>
         </a>
       </div>
     </div>
@@ -154,7 +162,7 @@ const Projects: React.FC = () => {
           </h2>
           
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
-            {projectsData.map((project, index) => (
+            {projectsDataSorted.map((project, index) => (
               <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
