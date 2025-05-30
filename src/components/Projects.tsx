@@ -19,20 +19,20 @@ const projectsData: Project[] = [
     title: '10xCards',
     description: 'A tool that leverages AI to generate flashcards from text, making studying more efficient and effective.',
     image: '/projects/10xCards.gif',
-    tags: ['React', 'Node.js', 'AWS', 'MongoDB'],
+    tags: ['React', 'Node.js', 'Astro', 'TypeScript', 'Tailwind CSS', 'Supabase', 'Vitest', 'Cloudflare', 'GitHub Actions'],
     githubUrl: 'https://github.com/pBachta/10x-cards-astro',
     liveUrl: 'https://10x-cards-ab6.pages.dev',
     blogUrl: 'https://blog.pbachta.dev/projects/10xCards',
   },
-  // {
-  //   id: 2,
-  //   title: 'E-commerce Platform',
-  //   description: 'A scalable e-commerce solution with microservices architecture. Implemented secure payment processing, inventory management, and user authentication.',
-  //   image: 'https://images.pexels.com/photos/230544/pexels-photo-230544.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-  //   tags: ['Java', 'Spring Boot', 'Docker', 'PostgreSQL'],
-  //   githubUrl: 'https://github.com/pBachta',
-  //   blogUrl: 'https://blog.pbachta.dev/projects/ecommerce-platform',
-  // },
+  {
+    id: 2,
+    title: 'This Portfolio',
+    description: 'A personal portfolio website showcasing my skills, projects, etc. Built with React, TypeScript, and Tailwind CSS.',
+    image: '/projects/portfolio.gif',
+    tags: ['React', 'TypeScript', 'Tailwind CSS', 'GitHub Pages'],
+    githubUrl: 'https://github.com/pBachta/pbachta.github.io',
+    blogUrl: 'https://blog.pbachta.dev/projects/portfolio',
+  },
   // {
   //   id: 3,
   //   title: 'Real-Time Chat Application',
@@ -157,7 +157,7 @@ const Projects: React.FC = () => {
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
             <span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 text-transparent bg-clip-text">
               Side Projects
-              <p className="ml-2 text-gray-400">coming soon</p>
+              <p className="ml-2 text-gray-400">more coming soon</p>
             </span>
           </h2>
           
