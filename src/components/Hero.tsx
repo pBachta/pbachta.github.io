@@ -85,13 +85,20 @@ const Hero: React.FC = () => {
 
           <div className="flex justify-center space-x-4">
             <a 
-              // href="/cv.pdf" 
-              // download
+              href="/cv/Pawel_Bachta_CV_PL.pdf" 
+              download
               className="flex items-center px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
             >
               <FileDown size={20} className="mr-2" />
-              Download CV
-              <p className="ml-2 text-gray-400">coming soon</p>
+              Download CV [PL]
+            </a>
+            <a 
+              href="/cv/Pawel_Bachta_CV_EN.pdf" 
+              download
+              className="flex items-center px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300"
+            >
+              <FileDown size={20} className="mr-2" />
+              Download CV [EN]
             </a>
             <a 
               // href="https://blog.pbachta.dev" 
