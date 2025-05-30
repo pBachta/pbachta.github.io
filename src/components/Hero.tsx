@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
               <Linkedin size={24} />
             </a>
             <a 
-              href="mailto:contact@example.com" 
+              href="mailto:bachta.pawel@gmail.com" 
               className="p-3 bg-gray-200 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:bg-primary-100 dark:hover:bg-primary-800 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300"
               aria-label="Email"
             >

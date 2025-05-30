@@ -49,7 +49,7 @@ const Footer: React.FC = () => {
                 <Linkedin size={20} />
               </a>
               <a 
-                href="mailto:contact@example.com"
+                href="mailto:bachta.pawel@gmail.com"
                 className="p-2 bg-gray-800 rounded-full text-gray-400 hover:text-white hover:bg-primary-600 transition-colors duration-300"
                 aria-label="Email"
               >
