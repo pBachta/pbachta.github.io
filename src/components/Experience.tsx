@@ -9,26 +9,43 @@ type Experience = {
   period: string;
   description: string;
   achievements: string[];
+  scopeOfDuties?: string[];
 };
+
+const itScopeOfDuties = [
+  'Design, development and maintenance of Java + Spring Boot backend applications deployed on the OpenShift environment',
+  'Dividing and migrating monoliths to a microservices architecture',
+  'Migrating systems to newer versions (Java 8>11>17, Spring Boot 2>3)',
+  'Integrations with other systems using REST and SOAP',
+  'Creating unit, integration and e2e tests (JUnit, Mockito, Pact)',
+  'Taking care of code quality by doing code review and quality monitoring using SonarQube',
+  'Analysis of system operation based on Prometheus, Grafana, ELK',
+  'Working with Oracle and PostgreSQL databases',
+  'Handling and resolving support tickets based on JIRA tickets and Confluence documentation',
+  'Working with code management tools like Git and GitLab',
+  'Onboarding and internal trainings for people joining the project',
+  'Close cooperation with team members and the client',
+];
 
 const itExperience: Experience[] = [
   {
     id: 1,
-    role: 'Senior Java Developer',
+    role: 'Junior Java Developer',
     company: 'Intive GmbH',
-    period: '2022 - Present',
-    description: 'Technical leader and backend architect driving the design of scalable Java microservices,' + 
-                  ' mentoring developers, and ensuring code quality and alignment with business goals.',
+    period: '2018 - 2019',
+    description: 'Entry-level backend developer focused on learning core Java and Spring concepts' + 
+                  ' while contributing to small features and bug fixes under close mentorship.',
     achievements: [
-      'Designed and led implementation of scalable microservice-based architecture', 
-      'Responsible for critical modules and system-wide technical decisions',
-      'Conducted thorough code reviews and mentored multiple junior and mid-level developers',
-      'Collaborated directly with Product Owners, DevOps, and QA to align tech with business goals',
-      'Resolved high-priority production issues, conducted root cause analysis and implemented long-term fixes',
-      'Advocated for engineering best practices, clean code and knowledge sharing in the team',
-      'Participated in architecture discussions and contributed to technical roadmaps',
-      'Engaged in continuous learning and applied new technologies to improve development processes',
-      'Worked closely with cross-functional teams to deliver high-quality software solutions',
+      'Delivered small features and bugfixes under supervision in an Agile team',
+      'Participated in daily stand-ups, sprint planning, and retrospectives',
+      'Collaborated with senior developers to learn best practices in software development',
+      'Gained experience in RESTful API development and integration',
+      'Familiar with Agile methodologies and version control systems',
+      'Worked with Spring Boot and Hibernate for backend development',
+      'Familiar with reading and understanding business requirements',
+      'Participated in code reviews and pair programming sessions',
+      'Open to feedback and continuously improving based on mentorship',
+      'Used Jira and Git for daily workflow and communication'
     ],
   },
   {
@@ -50,22 +67,21 @@ const itExperience: Experience[] = [
   },
   {
     id: 3,
-    role: 'Junior Java Developer',
+    role: 'Senior Java Developer',
     company: 'Intive GmbH',
-    period: '2018 - 2019',
-    description: 'Entry-level backend developer focused on learning core Java and Spring concepts' + 
-                  ' while contributing to small features and bug fixes under close mentorship.',
+    period: '2022 - Present',
+    description: 'Technical leader and backend architect driving the design of scalable Java microservices,' + 
+                  ' mentoring developers, and ensuring code quality and alignment with business goals.',
     achievements: [
-      'Delivered small features and bugfixes under supervision in an Agile team',
-      'Participated in daily stand-ups, sprint planning, and retrospectives',
-      'Collaborated with senior developers to learn best practices in software development',
-      'Gained experience in RESTful API development and integration',
-      'Familiar with Agile methodologies and version control systems',
-      'Worked with Spring Boot and Hibernate for backend development',
-      'Familiar with reading and understanding business requirements',
-      'Participated in code reviews and pair programming sessions',
-      'Open to feedback and continuously improving based on mentorship',
-      'Used Jira and Git for daily workflow and communication'
+      'Designed and led implementation of scalable microservice-based architecture', 
+      'Responsible for critical modules and system-wide technical decisions',
+      'Conducted thorough code reviews and mentored multiple junior and mid-level developers',
+      'Collaborated directly with Product Owners, DevOps, and QA to align tech with business goals',
+      'Resolved high-priority production issues, conducted root cause analysis and implemented long-term fixes',
+      'Advocated for engineering best practices, clean code and knowledge sharing in the team',
+      'Participated in architecture discussions and contributed to technical roadmaps',
+      'Engaged in continuous learning and applied new technologies to improve development processes',
+      'Worked closely with cross-functional teams to deliver high-quality software solutions',
     ],
   },
 ];
@@ -132,10 +148,40 @@ const ExperienceCard: React.FC<{ experience: Experience; index: number; isLast: 
               </li>
             ))}
           </ul>
+          {experience.scopeOfDuties && experience.scopeOfDuties.length > 0 && (
+            <div className="mt-6">
+              <h5 className="text-md font-semibold text-primary-700 dark:text-primary-300 mb-2">
+                <span className="bg-primary-100 dark:bg-primary-900 px-2 py-1 rounded font-bold">Scope of duties:</span>
+              </h5>
+              <ul className="list-disc pl-6 space-y-1">
+                {experience.scopeOfDuties.map((duty, i) => (
+                  <li key={i} className="text-gray-700 dark:text-gray-300"><span className="font-normal">{duty}</span></li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       </div>
     </div>
   );
+};
+
+// Funkcja do pogrubiania wybranych słów w tekście
+const highlightKeywords = (text: string) => {
+  const keywords = [
+    'Java', 'Spring Boot', 'OpenShift', 'microservices architecture', 'REST', 'SOAP',
+    'JUnit', 'Mockito', 'Pact', 'code review', 'SonarQube', 'Prometheus', 'Grafana', 'ELK',
+    'Oracle', 'PostgreSQL', 'JIRA', 'Confluence', 'Git', 'GitLab', 'Lab'
+  ];
+  let result = text;
+  keywords.forEach(word => {
+    // Dodaj klasę koloru do strong
+    result = result.replace(
+      new RegExp(`(${word})`, 'gi'),
+      '<strong class="text-primary-600 dark:text-primary-400">$1</strong>'
+    );
+  });
+  return result;
 };
 
 const Experience: React.FC = () => {
@@ -164,14 +210,40 @@ const Experience: React.FC = () => {
             </div>
             
             <div className="max-w-4xl mx-auto space-y-12">
-              {itExperience.map((exp, index) => (
+              {/* Najpierw pozostałe wpisy (np. id 4) poza ramką */}
+              {[...itExperience].reverse().filter(exp => ![1,2,3].includes(exp.id)).map((exp, index) => (
                 <ExperienceCard 
-                  key={exp.id} 
-                  experience={exp} 
+                  key={exp.id}
+                  experience={exp}
                   index={index}
-                  isLast={index === itExperience.length - 1} 
+                  isLast={index === 0}
                 />
               ))}
+              {/* Ramka tylko dla stanowisk Intive (id 1,2,3) */}
+              <div className="border border-primary-200 dark:border-primary-800 rounded-2xl p-6 mb-12 bg-white dark:bg-gray-900">
+                {[...itExperience].reverse().filter(exp => [1,2,3].includes(exp.id)).map((exp, index) => (
+                  <React.Fragment key={exp.id}>
+                    <ExperienceCard 
+                      experience={exp} 
+                      index={index}
+                      isLast={index === 2} 
+                    />
+                  </React.Fragment>
+                ))}
+                {/* Scope of duties na dole ramki */}
+                <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md border border-primary-200 dark:border-primary-800">
+                  <h5 className="text-lg font-bold text-primary-700 dark:text-primary-300 mb-2">
+                    Scope of duties:
+                  </h5>
+                  <ul className="list-disc pl-6 space-y-1">
+                    {itScopeOfDuties.map((duty, i) => (
+                      <li key={i} className="text-gray-700 dark:text-gray-300">
+                        <span className="font-normal" dangerouslySetInnerHTML={{ __html: highlightKeywords(duty) }} />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -187,7 +259,7 @@ const Experience: React.FC = () => {
             </div>
             
             <div className="max-w-4xl mx-auto space-y-12">
-              {marineExperience.map((exp, index) => (
+              {[...marineExperience].reverse().map((exp, index) => (
                 <ExperienceCard 
                   key={exp.id} 
                   experience={exp} 
