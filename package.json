@@ -8,6 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "postbuild": "echo 'pbachta.dev' > dist/CNAME",
+    "predeploy": "npm run build",   
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
