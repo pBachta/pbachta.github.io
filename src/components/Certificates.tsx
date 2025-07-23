@@ -41,13 +41,17 @@ const certificates = [
 
 const certificatesSorted = [...certificates].sort((a, b) => b.id - a.id);
 
-const CertificateCard: React.FC<{ certificate: typeof certificates[0]; index: number }> = ({
+const CertificateCard: React.FC<{
+	certificate: typeof certificates[0];
+	index: number;
+	onPreview: (certificate: typeof certificates[0]) => void;
+}> = ({
 	certificate,
 	index,
+	onPreview,
 }) => {
 	const cardRef = useRef<HTMLDivElement>(null);
 	const isInView = useInView(cardRef, { threshold: 0.1 });
-	const [showPreview, setShowPreview] = useState(false);
 
 	return (
 		<div
@@ -72,37 +76,11 @@ const CertificateCard: React.FC<{ certificate: typeof certificates[0]; index: nu
 
 			{certificate.preview && (
 				<button
-					onClick={() => setShowPreview(true)}
+					onClick={() => onPreview(certificate)}
 					className="flex items-center px-6 py-3 bg-gradient-to-r from-primary-600 to-secondary-600 hover:from-primary-700 hover:to-secondary-700 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 absolute left-6 bottom-6"
 				>
 					View Certificate
 				</button>
-			)}
-			{/* Certificate Preview Modal */}
-			{showPreview && (
-				<div
-					onClick={() => setShowPreview(false)}
-					className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
-				>
-					<div
-						onClick={e => e.stopPropagation()}
-						className="relative bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
-					>
-						<button
-							onClick={() => setShowPreview(false)}
-							className="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
-						>
-							<X size={20} />
-						</button>
-						<div className="p-4">
-							<img
-								src={certificate.preview}
-								alt={`${certificate.name} Certificate`}
-								className="max-h-[80vh] w-auto mx-auto rounded-lg"
-							/>
-						</div>
-					</div>
-				</div>
 			)}
 		</div>
 	);
@@ -111,6 +89,7 @@ const CertificateCard: React.FC<{ certificate: typeof certificates[0]; index: nu
 const Certificates: React.FC = () => {
 	const sectionRef = useRef<HTMLElement>(null);
 	const isInView = useInView(sectionRef, { threshold: 0.1 });
+	const [selectedCertificate, setSelectedCertificate] = useState<typeof certificates[0] | null>(null);
 
 	return (
 		<section
@@ -119,20 +98,49 @@ const Certificates: React.FC = () => {
 			className="py-20 bg-white dark:bg-gray-900"
 		>
 			<div className={`transition-all duration-1000 transform ${isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-				<div className="flex items-center justify-center mb-12">
-					<Award size={28} className="text-primary-500 mr-3" />
-					<h2 className="text-3xl md:text-4xl font-bold text-center">
-						<span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 text-transparent bg-clip-text">
-							Certificates & Courses
-						</span>
-					</h2>
-				</div>
-				<div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-					{certificatesSorted.map((cert, index) => (
-						<CertificateCard key={cert.id} certificate={cert} index={index} />
-					))}
+				<div className="max-w-4xl mx-auto px-4">
+					<div className="flex items-center justify-center mb-12">
+						<Award size={28} className="text-primary-500 mr-3" />
+						<h2 className="text-3xl md:text-4xl font-bold text-center">
+							<span className="bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 text-transparent bg-clip-text">
+								Certificates & Courses
+							</span>
+						</h2>
+					</div>
+					<div className="grid md:grid-cols-2 gap-8">
+						{certificatesSorted.map((cert, index) => (
+							<CertificateCard key={cert.id} certificate={cert} index={index} onPreview={setSelectedCertificate} />
+						))}
+					</div>
 				</div>
 			</div>
+
+			{/* Global Certificate Preview Modal */}
+			{selectedCertificate && selectedCertificate.preview && (
+				<div
+					onClick={() => setSelectedCertificate(null)}
+					className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+				>
+					<div
+						onClick={e => e.stopPropagation()}
+						className="relative bg-white dark:bg-gray-800 rounded-xl max-w-4xl w-full max-h-[90vh] overflow-hidden"
+					>
+						<button
+							onClick={() => setSelectedCertificate(null)}
+							className="absolute top-4 right-4 p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200"
+						>
+							<X size={20} />
+						</button>
+						<div className="p-4">
+							<img
+								src={selectedCertificate.preview}
+								alt={`${selectedCertificate.name} Certificate`}
+								className="max-h-[80vh] w-auto mx-auto rounded-lg"
+							/>
+						</div>
+					</div>
+				</div>
+			)}
 		</section>
 	);
 };
