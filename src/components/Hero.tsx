@@ -111,6 +111,7 @@ const Hero: React.FC = () => {
               <p className="ml-2 text-gray-400">coming soon</p>
             </a>
           </div>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">CV last updated: 23.07.2025</p>
         </div>
         
         <a 
