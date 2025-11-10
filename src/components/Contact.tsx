@@ -43,14 +43,8 @@ const Contact: React.FC = () => {
     {
       icon: <Mail size={24} />,
       title: 'Email',
-      content: 'bachta.pawel@gmail.com',
-      link: 'mailto:bachta.pawel@gmail.com',
-    },
-    {
-      icon: <Phone size={24} />,
-      title: 'Phone',
-      content: '+48 725 273 063',
-      link: 'tel:+48725273063',
+      content: 'pBachtaDev@gmail.com',
+      link: 'mailto:pBachtaDev@gmail.com',
     },
     {
       icon: <MapPin size={24} />,
