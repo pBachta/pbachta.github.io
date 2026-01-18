@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useInView } from '../hooks/useInView';
-import { Briefcase, Anchor } from 'lucide-react';
+import { Briefcase, Anchor, Sparkles } from 'lucide-react';
 
 type Experience = {
   id: number;
@@ -69,7 +69,7 @@ const itExperience: Experience[] = [
     id: 3,
     role: 'Senior Java Developer',
     company: 'Intive GmbH',
-    period: '2022 - Present',
+    period: '2022 - 2025',
     description: 'Technical leader and backend architect driving the design of scalable Java microservices,' + 
                   ' mentoring developers, and ensuring code quality and alignment with business goals.',
     achievements: [
@@ -82,6 +82,19 @@ const itExperience: Experience[] = [
       'Participated in architecture discussions and contributed to technical roadmaps',
       'Engaged in continuous learning and applied new technologies to improve development processes',
       'Worked closely with cross-functional teams to deliver high-quality software solutions',
+    ],
+  },
+  {
+    id: 4,
+    role: 'Owner & Senior Java Developer',
+    company: 'Paweł Bachta pBachtaDev',
+    period: '2025 - Present',
+    description: 'Launched an independent venture focusing on delivering tailored backend software solutions. Applying extensive Java and Spring Boot expertise to develop robust and scalable applications, with a commitment to modern development practices and client satisfaction.',
+    achievements: [
+      'Established and manage an independent software development business.',
+      'Develop and deliver custom backend solutions using Java and Spring Boot.',
+      'Collaborate directly with clients to define requirements and ensure project success.',
+      'Responsible for the full software development lifecycle, from architecture to deployment.',
     ],
   },
 ];
@@ -148,25 +161,61 @@ const ExperienceCard: React.FC<{ experience: Experience; index: number; isLast: 
               </li>
             ))}
           </ul>
-          {experience.scopeOfDuties && experience.scopeOfDuties.length > 0 && (
-            <div className="mt-6">
-              <h5 className="text-md font-semibold text-primary-700 dark:text-primary-300 mb-2">
-                <span className="bg-primary-100 dark:bg-primary-900 px-2 py-1 rounded font-bold">Scope of duties:</span>
-              </h5>
-              <ul className="list-disc pl-6 space-y-1">
-                {experience.scopeOfDuties.map((duty, i) => (
-                  <li key={i} className="text-gray-700 dark:text-gray-300"><span className="font-normal">{duty}</span></li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
       </div>
     </div>
   );
 };
 
-// Funkcja do pogrubiania wybranych słów w tekście
+const FeaturedExperienceCard: React.FC<{ experience: Experience }> = ({ experience }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { threshold: 0.1 });
+
+  return (
+    <div
+      ref={cardRef}
+      className={`relative transition-all duration-700 transform ${
+        isInView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+      }`}
+    >
+      <div className="absolute left-4 top-8 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700"></div>
+      <div className="absolute left-4 top-8 -ml-1.5 h-3 w-3 rounded-full bg-secondary-500 border-2 border-white dark:border-gray-900 z-10"></div>
+      
+      <div className="ml-12 relative">
+        <div className="bg-gradient-to-r from-primary-50 via-white to-primary-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 p-6 rounded-2xl shadow-lg hover:shadow-2xl transition-shadow border border-primary-200 dark:border-primary-800 shadow-primary-500/10">
+          <div className="flex flex-wrap justify-between items-start mb-4">
+            <div className="flex items-center gap-3">
+              <Sparkles className="text-secondary-500" size={24} />
+              <div>
+                <h3 className="text-xl font-bold text-gray-800 dark:text-gray-200">{experience.role}</h3>
+                <h4 className="text-lg font-medium text-primary-600 dark:text-primary-400">{experience.company}</h4>
+              </div>
+              <span className="ml-2 px-3 py-1 text-xs font-semibold text-secondary-800 bg-secondary-100 dark:bg-secondary-900 dark:text-secondary-200 rounded-full">
+                Founder
+              </span>
+            </div>
+            <div className="flex items-center mt-2 sm:mt-0 px-3 py-1 bg-gray-100 dark:bg-gray-800 rounded-full">
+              <span className="text-sm text-gray-600 dark:text-gray-400">{experience.period}</span>
+            </div>
+          </div>
+          
+          <p className="text-gray-600 dark:text-gray-400 mb-4">{experience.description}</p>
+          
+          <h5 className="text-md font-semibold text-gray-700 dark:text-gray-300 mb-2">Key Responsibilities & Focus Areas:</h5>
+          <ul className="space-y-2">
+            {experience.achievements.map((achievement, i) => (
+              <li key={i} className="flex items-start">
+                <span className="inline-block h-2 w-2 bg-secondary-500 rounded-full mt-2 mr-2"></span>
+                <span className="text-gray-600 dark:text-gray-400">{achievement}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const highlightKeywords = (text: string) => {
   const keywords = [
     'Java', 'Spring Boot', 'OpenShift', 'microservices architecture', 'REST', 'SOAP',
@@ -175,10 +224,9 @@ const highlightKeywords = (text: string) => {
   ];
   let result = text;
   keywords.forEach(word => {
-    // Dodaj klasę koloru do strong
     result = result.replace(
       new RegExp(`(${word})`, 'gi'),
-      '<strong class="text-primary-600 dark:text-primary-400">$1</strong>'
+      '<strong class="text-primary-600 dark:text-primary-400"></strong>'
     );
   });
   return result;
@@ -186,7 +234,11 @@ const highlightKeywords = (text: string) => {
 
 const Experience: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const isInView = useInView(sectionRef, { threshold: 0.1 });
+  const isInView = useInView(sectionRef, { threshold: 0.05 });
+
+  const sortedItExperience = [...itExperience].reverse();
+  const featuredExperience = sortedItExperience.find(exp => exp.id === 4);
+  const intiveExperiences = sortedItExperience.filter(exp => [1, 2, 3].includes(exp.id));
 
   return (
     <section 
@@ -210,30 +262,23 @@ const Experience: React.FC = () => {
             </div>
             
             <div className="max-w-4xl mx-auto space-y-12">
-              {/* Najpierw pozostałe wpisy (np. id 4) poza ramką */}
-              {[...itExperience].reverse().filter(exp => ![1,2,3].includes(exp.id)).map((exp, index) => (
-                <ExperienceCard 
-                  key={exp.id}
-                  experience={exp}
-                  index={index}
-                  isLast={index === 0}
-                />
-              ))}
-              {/* Ramka tylko dla stanowisk Intive (id 1,2,3) */}
-              <div className="border border-primary-200 dark:border-primary-800 rounded-2xl p-6 mb-12 bg-white dark:bg-gray-900">
-                {[...itExperience].reverse().filter(exp => [1,2,3].includes(exp.id)).map((exp, index) => (
+              {featuredExperience && <FeaturedExperienceCard experience={featuredExperience} />}
+
+              <div className="border border-primary-200 dark:border-primary-800 rounded-2xl p-6 bg-white dark:bg-gray-900">
+                {intiveExperiences.map((exp, index) => (
                   <React.Fragment key={exp.id}>
                     <ExperienceCard 
                       experience={exp} 
                       index={index}
-                      isLast={index === 2} 
+                      isLast={index === intiveExperiences.length - 1} 
                     />
+                    {index < intiveExperiences.length - 1 && <div className="h-12"></div>}
                   </React.Fragment>
                 ))}
-                {/* Scope of duties na dole ramki */}
-                <div className="mt-8 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-md border border-primary-200 dark:border-primary-800">
-                  <h5 className="text-lg font-bold text-primary-700 dark:text-primary-300 mb-2">
-                    Scope of duties:
+                
+                <div className="mt-8 ml-12 p-6 bg-gray-50 dark:bg-gray-800 rounded-xl shadow-inner border border-primary-100 dark:border-primary-900">
+                  <h5 className="text-lg font-bold text-primary-700 dark:text-primary-300 mb-4">
+                    Shared Scope of Duties at Intive:
                   </h5>
                   <ul className="list-disc pl-6 space-y-1">
                     {itScopeOfDuties.map((duty, i) => (
