@@ -71,14 +71,14 @@ const Contact: React.FC = () => {
           </h2>
           
           <div className="max-w-6xl mx-auto">
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="flex justify-center flex-wrap gap-8 mb-12">
               {contactInfo.map((info, index) => (
                 <a
                   key={index}
                   href={info.link}
                   target={info.title === 'Location' ? '_blank' : undefined}
                   rel={info.title === 'Location' ? 'noreferrer' : undefined}
-                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 flex flex-col items-center text-center transition-transform hover:transform hover:-translate-y-1 hover:shadow-lg"
+                  className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 flex flex-col items-center text-center transition-transform hover:transform hover:-translate-y-1 hover:shadow-lg w-full md:w-auto flex-grow max-w-xs"
                 >
                   <div className="p-3 bg-primary-100 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 rounded-full mb-4">
                     {info.icon}
