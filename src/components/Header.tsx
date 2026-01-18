@@ -36,11 +36,9 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
-        <a
-          href="#home"
-          className="text-xl md:text-2xl font-bold bg-gradient-to-r from-primary-600 to-secondary-600 dark:from-primary-400 dark:to-secondary-400 text-transparent bg-clip-text"
-        >
-          Paweł Bachta
+        <a href="#home" className="block">
+          <img src="/banner_white_mode.png" alt="Paweł Bachta pBachta.dev banner" className="h-10 w-auto dark:hidden" />
+          <img src="/banner_dark_mode.png" alt="Paweł Bachta pBachta.dev banner" className="h-10 w-auto hidden dark:block" />
         </a>
 
         {/* Desktop Navigation */}

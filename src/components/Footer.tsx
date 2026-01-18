@@ -13,19 +13,26 @@ const Footer: React.FC = () => {
     <footer className="bg-gray-900 text-white py-12">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col md:flex-row justify-between items-center">
-          <div className="mb-6 md:mb-0">
-            <a 
-              href="#home" 
-              className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 text-transparent bg-clip-text"
-            >
-              Paweł Bachta
-            </a>
-            <p className="mt-2 text-gray-400 max-w-md">
-              Senior Software Developer
-            </p>
-            <p className="mt-2 text-gray-400 max-w-md">
-              Java and Spring Boot Specialized
-            </p>
+          <div className="flex items-center gap-6 mb-6 md:mb-0">
+            <img 
+              src="/footer_logo.png" 
+              alt="Paweł Bachta circular logo" 
+              className="w-16 h-16 md:w-20 md:h-20 rounded-full shadow-lg"
+            />
+            <div>
+              <a 
+                href="#home" 
+                className="text-2xl font-bold bg-gradient-to-r from-primary-400 to-secondary-400 text-transparent bg-clip-text"
+              >
+                Paweł Bachta
+              </a>
+              <p className="mt-1 text-gray-400">
+                Senior Software Developer
+              </p>
+              <p className="text-gray-400">
+                Java and Spring Boot Specialized
+              </p>
+            </div>
           </div>
           
           <div className="flex flex-col items-center md:items-end">
