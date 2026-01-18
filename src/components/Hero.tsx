@@ -100,16 +100,6 @@ const Hero: React.FC = () => {
               <FileDown size={20} className="mr-2" />
               Download CV [EN]
             </a>
-            <a 
-              // href="https://blog.pbachta.dev" 
-              // target="_blank"
-              // rel="noreferrer"
-              className="flex items-center px-6 py-3 bg-white dark:bg-gray-800 text-gray-800 dark:text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700"
-            >
-              <BookOpen size={20} className="mr-2" />
-              Visit Blog
-              <p className="ml-2 text-gray-400">coming soon</p>
-            </a>
           </div>
             <p className="text-gray-500 dark:text-gray-400 text-sm">CV last updated: 28.08.2025</p>
         </div>
